@@ -1,0 +1,19 @@
+.main-container,
+.explore-container, 
+.frag-container,
+.frag-header,
+.frag-notes { 
+    display: flex;
+}
+
+.main-container,
+.explore-container, 
+.frag-container {
+    flex-direction: column;
+}
+
+.frag-header,
+.frag-notes {
+    align-items: center;
+    justify-content: center;
+}
