@@ -20,7 +20,6 @@ def load_data(path):
 def collect_fragrances():
     brands = load_data(os.getenv("__FRAGS_PATH"))
     for b in brands["fragrances"]: #the entire list of all brand names
-        print(b)
         res = frag.ret_fragrances(b)
         frags.extend(res)
 
