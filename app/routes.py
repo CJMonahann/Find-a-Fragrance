@@ -4,6 +4,8 @@ from app.api import FragranceAPI #created API object to interact with API
 from dotenv import load_dotenv
 from app.models import Brands, Fragrances, Accords, Notes #tables in db
 import json, os
+from sqlalchemy.orm import joinedload
+from sqlalchemy.sql.expression import func
 
 #load .env variables and collect paths to website data
 load_dotenv()
@@ -64,11 +66,39 @@ def populate_db(brands, API):
                             db.session.add(new_note)
                             db.session.commit()    
 
-#collect_fragrances()
 check_db(API)
+
+#returns all fragrances held in the database - with all info
+def get_all_frags():
+    frags = Fragrances.query\
+    .join(Brands, Fragrances.b_id == Brands.id)\
+    .options(
+        joinedload(Fragrances.accords),
+        joinedload(Fragrances.notes),
+        joinedload(Fragrances.brand)
+    )\
+    .all()
+
+    return frags
+
+#returns a randomized, limited number of fragrances - with all info
+def get_lim_frags(num=5):
+    frags = Fragrances.query\
+    .join(Brands, Fragrances.b_id == Brands.id)\
+    .options(
+        joinedload(Fragrances.accords),
+        joinedload(Fragrances.notes),
+        joinedload(Fragrances.brand)
+    )\
+    .order_by(func.random())\
+    .limit(num)\
+    .all()
+
+    return frags
 
 @app.route('/')
 @app.route('/HOME')
 @app.route('/home')
 def index():
-    return render_template('index.html')
+    frags = get_lim_frags()
+    return render_template('index.html', frags = frags)

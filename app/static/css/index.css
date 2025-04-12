@@ -1,4 +1,19 @@
 .prompt-container {
+    padding: 5rem;
+    text-align: center;
+}
+
+.input-container textarea {
+    font-size: 1rem;
+    width: 60%;
+    border: none;
+    resize: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.prompt-container {
     background-color: green;
 }
 

@@ -7,6 +7,8 @@ class Brands(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=False)
 
+    fragrances = db.relationship("Fragrances", back_populates="brand", cascade="all, delete")
+
 class Fragrances(db.Model):
     __tablename__ = 'Fragrances'
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +20,10 @@ class Fragrances(db.Model):
     rating = db.Column(db.Integer, unique=False)
     img = db.Column(db.String(250), unique=False)
     url = db.Column(db.String(250), unique=False)
+
+    brand = db.relationship("Brands", back_populates="fragrances")
+    accords = db.relationship("Accords", backref="fragrance", cascade="all, delete")
+    notes = db.relationship("Notes", backref="fragrance", cascade="all, delete")
 
 class Accords(db.Model):
     __tablename__ = 'Accords'
