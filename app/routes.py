@@ -72,5 +72,4 @@ check_db(API)
 @app.route('/HOME')
 @app.route('/home')
 def index():
-    print(len(frags))
-    return render_template('index.html', frags=frags)
+    return render_template('index.html')
