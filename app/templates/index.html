@@ -1,10 +1,25 @@
 {% extends "parent-templates/base-content.html" %}
-{% block title %}Explore Scents{% endblock %}
+{% block title %}Welcome{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+{% endblock %}
 
 {% block content %}
-
-<main>
-    <h1>Hello!</h1>
+<main class = "main-container">
+    <div class="prompt-container">
+        <h1>Find a cologne just for you - just type away!</h1>
+        <div class="input-container">
+            <form method="POST" action="/search/desc">
+                <textarea name="desc" id="desc" placeholder="e.g., vanilla, sweet, with a hint of amber"></textarea>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="frags-container">
+        frags container
+    </div>
+    <div class="info-container">
+        info container
+    </div>
 </main>
-
 {% endblock %}

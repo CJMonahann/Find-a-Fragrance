@@ -6,7 +6,6 @@ from app.models import Brands, Fragrances, Accords, Notes #tables in db
 import json, os
 
 #load .env variables and collect paths to website data
-frags = []
 load_dotenv()
 API = FragranceAPI()
 

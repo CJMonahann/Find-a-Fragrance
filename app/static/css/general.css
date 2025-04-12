@@ -1,19 +1,11 @@
-.main-container,
-.explore-container, 
-.frag-container,
-.frag-header,
-.frag-notes { 
+body {
+    margin: 0;
+}
+
+.main-container { 
     display: flex;
 }
 
-.main-container,
-.explore-container, 
-.frag-container {
+.main-container {
     flex-direction: column;
-}
-
-.frag-header,
-.frag-notes {
-    align-items: center;
-    justify-content: center;
 }
