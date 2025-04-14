@@ -13,14 +13,108 @@
     overflow: hidden;
 }
 
+.frags-container,
+.frag-container,
+.frag-header,
+.frag-img,
+.frag-notes,
+.frag-accs, 
+.info-container,
+.scents-info,
+.nts-info,
+.accs-info {
+    display: flex;
+}
+
+.frag-notes,
+.frag-accs {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.frags-container {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.frags-container,
+.info-container {
+    padding: 1rem;
+}
+
+.frags-container,
+.scents-info {
+    gap: 1rem;
+}
+
+.frag-container,
+.info-container,
+.nts-info,
+.accs-info {
+    flex-direction: column;
+}
+
+.frag-container {
+    text-align: start;
+}
+
+.frag-header {
+    justify-content:space-between;
+    align-items: start;
+}
+
+.frag-img {
+    justify-content: center;
+    align-items: start;
+    height: clamp(10%, 20%, 40%);
+}
+
+.frag-img,
+.frag-about {
+    padding: 0.3rem;
+}
+
+.frag-perf {
+    font-size: clamp(0.5rem, 1.2rem, 1.4);
+}
+
+.frag-container img {
+    width: clamp(10vw, 25vw, 40vw);
+    height: clamp(10vh, 30vh, 40vh);
+}
+
+.frag-brand,
+.frag-desc {
+    font-size: clamp(0.5rem, 1rem, 1.5rem);
+}
+
+.frag-notes p {
+    font-size: clamp(0.1rem, 0.8rem, 1rem);
+    margin-top: 1em;
+}
+
+.frag-accs p {
+    font-size: clamp(0.1rem, 0.8rem, 1rem);
+    margin-top: 1em;
+}
+
+
+.scents-info {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.scents-info p {
+    text-align: center;
+}
+
+.scents-info div {
+    padding: 2rem;
+    background-color: blue;
+    border-radius: 0.5rem;
+}
+
 .prompt-container {
     background-color: green;
 }
 
-.frags-container {
-    background-color: yellow;
-}
-
-.info-container {
-    background-color: blue;
-}

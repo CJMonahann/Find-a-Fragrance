@@ -17,10 +17,7 @@ def load_data(path):
         data = json.load(file)
     return data
 
-def check_db(API):
-
-    j_brands = load_data(os.getenv("__FRAGS_PATH"))
-    j_brands = j_brands["fragrances"] #list of wanted brand names
+def check_db(API, j_brands):
 
     with app.app_context():
         db_brands = [b.name for b in Brands.query.all()] #brand names held in db
@@ -66,7 +63,8 @@ def populate_db(brands, API):
                             db.session.add(new_note)
                             db.session.commit()    
 
-check_db(API)
+data = load_data(os.getenv("__FRAGS_PATH"))
+check_db(API, data["fragrances"])
 
 #returns all fragrances held in the database - with all info
 def get_all_frags():
@@ -100,5 +98,7 @@ def get_lim_frags(num=5):
 @app.route('/HOME')
 @app.route('/home')
 def index():
-    frags = get_lim_frags()
-    return render_template('index.html', frags = frags)
+    nts = data["info"]["nts"] # form: { "str":"str", ... }
+    accs = data["info"]["accs"] # form: { "str":"str", ... }
+    frags = get_lim_frags(3)
+    return render_template('index.html', frags = frags, nts = nts, accs = accs)

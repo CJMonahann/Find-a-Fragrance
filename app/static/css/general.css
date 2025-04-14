@@ -2,10 +2,42 @@ body {
     margin: 0;
 }
 
-.main-container { 
+.main-container,
+.footer-links {
     display: flex;
+}
+
+.main-container { 
+    width: 100%;
 }
 
 .main-container {
     flex-direction: column;
 }
+
+footer {
+    width: 100%;
+    background-color: darkgreen;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+.footer-bttn {
+    padding: 0.8rem;
+    background-color: green;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-bttn a {
+    width: 100%;
+}
+
+.footer-links {
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+}
+

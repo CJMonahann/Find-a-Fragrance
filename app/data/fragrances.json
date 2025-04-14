@@ -1,3 +1,13 @@
 {
-    "fragrances": ["Versace"]
+    "fragrances": ["Versace"],
+    "info": {
+        "nts": {
+            "nt-1": "Think of notes as distinct scents you can identify in a fragrance.",
+            "nt-2": "They're categorized by how quickly they evaporate"
+        },
+        "accs": {
+            "acc-1": "An accord is a blend of multiple notes that creates a new, unified scent.",
+            "acc-2": "It's like a perfume \"theme\" - something your nose perceives as a single, harmonious smell."
+        }
+    }
 }

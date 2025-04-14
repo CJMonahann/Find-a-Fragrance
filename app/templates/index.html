@@ -1,13 +1,13 @@
 {% extends "parent-templates/base-content.html" %}
 {% block title %}Welcome{% endblock %}
 {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
 <main class = "main-container">
     <div class="prompt-container">
-        <h1>Find a cologne just for you - just type away!</h1>
+        <h1>Find a cologne for you - just type away!</h1>
         <div class="input-container">
             <form method="POST" id="chatbox" action="/search/desc">
                 <textarea name="desc" id="desc" placeholder="e.g., vanilla, sweet, with a hint of amber"></textarea>
@@ -18,34 +18,54 @@
         {% for frag in frags %} 
         <div class="frag-container">
             <div class="frag-header">
-                <h2>{{frag.perfume}}</h2>
-                <a href="{{frag.url}}">Link</a>
+                <p class="frag-perf">{{frag.perfume}}</p>
+                <a href="{{frag.url}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                    </svg>
+                </a>
             </div>
-            {% if frag.img %}
-                <img src="{{frag.img}}">
-            {% else %}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
-                    <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z"/>
-                </svg>
-            {% endif %}
-            <h3>{{frag.brand.name}}</h3>
-            <p>{{frag.desc}}</p>
-            <div class="frag-notes">
-            {% for nt in frag.notes %}
-                <p>{{nt.nt}}</p>
-            {% endfor %}
+            <div class="frag-img">
+                {% if frag.img %}
+                    <img src="{{frag.img}}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='imgs/DefaultFrag.png') }}">
+                {% endif %}
             </div>
-            <div class="frag-accs">
-                {% for acc in frag.accords %}
-                    <p>{{acc.acc}}</p>
+            <div class="frag-about">
+                <p class="frag-brand">{{frag.brand.name}}</p>
+                <p class="frag-desc">{{frag.desc}}</p>
+                <div class="frag-notes">
+                {% for nt in frag.notes %}
+                    <p>{{nt.nt}}</p>
                 {% endfor %}
+                </div>
+                <div class="frag-accs">
+                    {% for acc in frag.accords %}
+                        <p>{{acc.acc}}</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
     <div class="info-container">
-        info container
+        <div class="conc-info">
+            hello!
+        </div>
+        <div class="scents-info">
+            <div class="nts-info">
+                {% for nt in nts.values() %}
+                    <p class="info-nt">{{nt}}</p>
+                {% endfor %}
+            </div>
+            <div class="accs-info">
+                {% for acc in accs.values() %}
+                    <p class="info-acc">{{acc}}</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </main>
 {% endblock %}
