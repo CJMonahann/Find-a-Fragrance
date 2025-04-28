@@ -16,10 +16,13 @@
 .frags-container,
 .frag-container,
 .frag-header,
+.conc-header,
 .frag-img,
 .frag-notes,
 .frag-accs, 
 .info-container,
+.conc-info,
+.conc-notes,
 .scents-info,
 .nts-info,
 .accs-info {
@@ -27,14 +30,21 @@
 }
 
 .frag-notes,
-.frag-accs {
+.frags-accs,
+.info-container {
     flex-wrap: wrap;
+}
+
+.frag-notes,
+.frag-accs,
+.conc-notes {
     gap: 0.5rem;
 }
 
-.frags-container {
+.frags-container,
+.conc-info {
     justify-content: space-evenly;
-    align-items: center;
+    align-items: start;
 }
 
 .frags-container,
@@ -43,12 +53,14 @@
 }
 
 .frags-container,
+.conc-info,
 .scents-info {
     gap: 1rem;
 }
 
 .frag-container,
 .info-container,
+.conc-container,
 .nts-info,
 .accs-info {
     flex-direction: column;
@@ -58,7 +70,8 @@
     text-align: start;
 }
 
-.frag-header {
+.frag-header,
+.conc-header {
     justify-content:space-between;
     align-items: start;
 }
@@ -70,11 +83,13 @@
 }
 
 .frag-img,
-.frag-about {
+.frag-about,
+.conc-about {
     padding: 0.3rem;
 }
 
-.frag-perf {
+.frag-perf,
+.conc-typ {
     font-size: clamp(0.5rem, 1.2rem, 1.4);
 }
 
@@ -84,11 +99,14 @@
 }
 
 .frag-brand,
-.frag-desc {
+.frag-desc,
+.conc-conc,
+.conc-hrs {
     font-size: clamp(0.5rem, 1rem, 1.5rem);
 }
 
-.frag-notes p {
+.frag-notes p,
+.conc-notes p{
     font-size: clamp(0.1rem, 0.8rem, 1rem);
     margin-top: 1em;
 }
@@ -100,8 +118,8 @@
 
 
 .scents-info {
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: center;
+    align-items:start;
 }
 
 .scents-info p {
@@ -110,9 +128,46 @@
 
 .scents-info div {
     padding: 2rem;
-    background-color: blue;
     border-radius: 0.5rem;
 }
+
+.nts-info,
+.accs-info {
+    flex: 1;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+.nts-info {
+    background-image: url('../imgs/Scents.png');
+}
+
+.accs-info {
+    background-image: url('../imgs/Accords.png');
+}
+
+.nts-info::before,
+.accs-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 0;
+  } 
+
+.nts-info p,
+.accs-info p {
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+  }
 
 .prompt-container {
     background-color: green;

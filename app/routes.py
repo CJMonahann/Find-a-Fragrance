@@ -63,7 +63,10 @@ def populate_db(brands, API):
                             db.session.add(new_note)
                             db.session.commit()    
 
+#LOADING NEEDED DATA FOR INDEX PAGE
+#CHECKING DB BEFORE APP LAUNCH FOR ALL FRAGS
 data = load_data(os.getenv("__FRAGS_PATH"))
+concs = load_data(os.getenv("__CONCS_PATH"))
 check_db(API, data["fragrances"])
 
 #returns all fragrances held in the database - with all info
@@ -101,4 +104,4 @@ def index():
     nts = data["info"]["nts"] # form: { "str":"str", ... }
     accs = data["info"]["accs"] # form: { "str":"str", ... }
     frags = get_lim_frags(3)
-    return render_template('index.html', frags = frags, nts = nts, accs = accs)
+    return render_template('index.html', frags = frags, concs = concs, nts = nts, accs = accs)

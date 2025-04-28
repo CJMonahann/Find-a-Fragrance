@@ -52,18 +52,37 @@
     </div>
     <div class="info-container">
         <div class="conc-info">
-            hello!
+            {% for typ in concs.values() %}
+            <div class="conc-container">
+                <div class="conc-header">
+                    <p class="conc-typ">{{typ.type}}</p>
+                </div>
+                <div class="conc-about">
+                    <p class="conc-conc">{{typ.conc}}</p>
+                    <p class="conc-hrs">{{typ.hrs}}</p>
+                    <div class="conc-notes">
+                        {% for nt in typ.nts %}
+                        <p>{{nt}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
         <div class="scents-info">
             <div class="nts-info">
-                {% for nt in nts.values() %}
-                    <p class="info-nt">{{nt}}</p>
-                {% endfor %}
+                <div class="txt-boxes">
+                    {% for nt in nts.values() %}
+                        <p class="info-nt">{{nt}}</p>
+                    {% endfor %}
+                </div>
             </div>
             <div class="accs-info">
-                {% for acc in accs.values() %}
-                    <p class="info-acc">{{acc}}</p>
-                {% endfor %}
+                <div class="txt-boxes">
+                    {% for acc in accs.values() %}
+                        <p class="info-acc">{{acc}}</p>
+                    {% endfor %}
+                </div> 
             </div>
         </div>
     </div>
