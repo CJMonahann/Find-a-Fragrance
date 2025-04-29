@@ -3,30 +3,35 @@
         "type": "Eau Fraîche",
         "conc": "1% - 3%",
         "hrs": "<1 hour",
-        "nts": ["Barely Scented", "Mist-Like"]
+        "nts": ["Barely Scented", "Mist-Like"],
+        "per":"3"
     },
     "frag-2": {
         "type": "Eau de Cologne (EDC)",
         "conc": "2% - 5%",
         "hrs": "1-2 hours",
-        "nts": ["Very Light", "Refreshing"]
+        "nts": ["Very Light", "Refreshing"],
+        "per":"5"
     },
     "frag-3": {
         "type": "Eau de Toilette (EDT)",
         "conc": "5% - 15% (commonly around 10%)",
         "hrs": "2 - 4 hours",
-        "nts": ["Lighter", "Fresher", "Often Cheaper"]
+        "nts": ["Lighter", "Fresher", "Often Cheaper"],
+        "per":"10"
     },
     "frag-4": {
         "type": "Eau de Parfum (EDP)",
         "conc": "15% - 20%",
         "hrs": "4 - 6 hours",
-        "nts": ["Strong", "Little Lighter"]
+        "nts": ["Strong", "Little Lighter"],
+        "per":"20"
     },
     "frag-5": {
         "type": "Parfum (Extrait de Parfum)",
         "conc": "20% - 30% (sometimes up to 40%)",
         "hrs": "6 - 8+ hours",
-        "nts": ["Rich", "Strong", "Most Expensive"]
+        "nts": ["Rich", "Strong", "Most Expensive"],
+        "per":"30"
     }
 }

@@ -1,3 +1,7 @@
+.spacing {
+    margin-top: 2rem;
+}
+
 .prompt-container {
     padding: 5rem;
     text-align: center;
@@ -16,6 +20,7 @@
 .frags-container,
 .frag-container,
 .frag-header,
+.conc-container,
 .conc-header,
 .frag-img,
 .frag-notes,
@@ -48,11 +53,13 @@
 }
 
 .frags-container,
-.info-container {
+.info-container,
+.conc-info {
     padding: 1rem;
 }
 
 .frags-container,
+.info-container,
 .conc-info,
 .scents-info {
     gap: 1rem;
@@ -116,6 +123,24 @@
     margin-top: 1em;
 }
 
+.info-container {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.conc-container {
+    color: white;
+    background-color: #1E201E;
+    border-radius: 1rem;
+}
+
+
+.conc-header {
+    background-color: #2E073F;
+}
+
+.conc-header {
+    padding: 0.3rem;
+}
 
 .scents-info {
     justify-content: center;
@@ -170,6 +195,6 @@
   }
 
 .prompt-container {
-    background-color: green;
+    background-color: black;
+    color: white;
 }
-
