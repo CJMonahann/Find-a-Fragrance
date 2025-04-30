@@ -86,7 +86,6 @@
 .frag-img {
     justify-content: center;
     align-items: start;
-    height: clamp(10%, 20%, 40%);
 }
 
 .frag-img,
@@ -100,7 +99,17 @@
     font-size: clamp(0.5rem, 1.2rem, 1.4);
 }
 
-.frag-container img {
+.frag-container {
+    border: 1.5px solid black;
+    border-radius: 0.2rem;
+}
+
+.frag-img,
+.frag-about {
+    padding: 1rem;
+}
+
+.frag-img img {
     width: clamp(10vw, 25vw, 40vw);
     height: clamp(10vh, 30vh, 40vh);
 }
@@ -112,15 +121,30 @@
     font-size: clamp(0.5rem, 1rem, 1.5rem);
 }
 
+.frag-header {
+    color: white;
+}
+
 .frag-notes p,
 .conc-notes p{
+    color: white;
     font-size: clamp(0.1rem, 0.8rem, 1rem);
     margin-top: 1em;
 }
 
+.frag-notes p {
+    background-color: #C63C51;
+}
+
+.conc-notes p {
+    background-color: #2E073F;
+}
+
 .frag-accs p {
+    color: white;
     font-size: clamp(0.1rem, 0.8rem, 1rem);
     margin-top: 1em;
+    background-color: #FB773C;
 }
 
 .info-container {
@@ -134,12 +158,23 @@
 }
 
 
+.frag-header,
 .conc-header {
     background-color: #2E073F;
 }
 
-.conc-header {
+.frag-header,
+.conc-header,
+.frag-notes p,
+.conc-notes p,
+.frag-accs p {
     padding: 0.3rem;
+}
+
+.frag-notes p,
+.conc-notes p,
+.frag-accs p {
+    border-radius: 0.3rem;
 }
 
 .scents-info {
