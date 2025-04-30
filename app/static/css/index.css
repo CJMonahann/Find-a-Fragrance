@@ -233,3 +233,24 @@
     background-color: black;
     color: white;
 }
+
+/*some media queries for now */
+
+@media screen and (max-width: 1116px) {
+    .frags-container,
+    .conc-info,
+    .scents-info {
+        flex-direction: column;
+    }
+
+    .conc-info, 
+    .scents-info {
+        align-items: center;
+    }
+
+    .conc-container,
+    .nts-info,
+    .accs-info {
+        width: 100%;
+    }
+}
