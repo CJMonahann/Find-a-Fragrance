@@ -236,18 +236,20 @@
 
 /*some media queries for now */
 
-@media screen and (max-width: 1116px) {
+@media screen and (max-width: 1400px) {
     .frags-container,
     .conc-info,
     .scents-info {
         flex-direction: column;
     }
 
+    .frags-container,
     .conc-info, 
     .scents-info {
         align-items: center;
     }
 
+    .frag-container,
     .conc-container,
     .nts-info,
     .accs-info {

@@ -6,6 +6,7 @@ from app.models import Brands, Fragrances, Accords, Notes #tables in db
 import json, os
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
+from slugify import slugify
 
 #load .env variables and collect paths to website data
 load_dotenv()
@@ -69,6 +70,25 @@ data = load_data(os.getenv("__FRAGS_PATH"))
 concs = load_data(os.getenv("__CONCS_PATH"))
 check_db(API, data["fragrances"])
 
+#returns all brands held in the database - with all info
+def get_all_brands():
+    brands = Brands.query.all()
+    return brands
+
+#sorts the brands into a hashset based off each letter
+def sort_brands(brands):
+    letterSet = {}
+    for c in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        letterSet[c] = []
+    letterSet["*"] = []
+    
+    for b in brands:
+        if b.name[0].upper() in letterSet:
+            letterSet[b.name[0].upper()].append(b)
+        else:
+            letterSet["*"].append(b)
+    return letterSet
+
 #returns all fragrances held in the database - with all info
 def get_all_frags():
     frags = Fragrances.query\
@@ -105,3 +125,25 @@ def index():
     accs = data["info"]["accs"] # form: { "str":"str", ... }
     frags = get_lim_frags(3)
     return render_template('index.html', frags = frags, concs = concs, nts = nts, accs = accs)
+
+@app.route('/all/brands')
+def all_brands():
+    brands = get_all_brands()
+    brandSet = sort_brands(brands)
+    return render_template('all-brands.html', brandSet = brandSet)
+
+@app.route('/personal/web')
+def redirect_web():
+    return redirect(os.getenv("__PERSONAL_WEB"))
+
+@app.route('/personal/github')
+def redirect_gh():
+    return redirect(os.getenv("__PERSONAL_GITHUB"))
+
+@app.route('/personal/linkedin')
+def redirect_ln():
+    return redirect(os.getenv("__PERSONAL_LINKEDIN"))
+
+@app.route('/personal/instagram')
+def redirect_ig():
+    return redirect(os.getenv("__PERSONAL_INSTAGRAM"))

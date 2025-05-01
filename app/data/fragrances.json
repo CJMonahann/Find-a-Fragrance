@@ -1,5 +1,7 @@
 {
-    "fragrances": ["Versace", "Jean Paul Gaultier", "Dolce and Gabbana", "Giorgio Armani", "Paco Rabanne", "Azzaro"],
+    "fragrances": ["Versace", "Jean Paul Gaultier", "Dolce and Gabbana", "Giorgio Armani", "Paco Rabanne", "Azzaro", "Dior", 
+    "Saint Laurent", "Creed", "Chanel", "Valentino", "Abercrombie & Fitch", "Dolce & Gabbana", "Coach", "Armani", "Nautica",
+    "Bath & Body Works", "Gucci"],
     "info": {
         "nts": {
             "nt-1": "Think of notes as distinct scents you can identify in a fragrance.",

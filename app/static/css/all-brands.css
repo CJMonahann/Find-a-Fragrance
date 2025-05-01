@@ -1,0 +1,38 @@
+.brands-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.letter-container {
+    border: 1.5px solid black;
+    border-radius: 0.15rem;
+}
+
+.letter-header {
+    color: white;
+    background-color: #2E073F;
+    padding: 0.3rem;
+}
+
+.letter-brands {
+    display: flex;
+    gap: 1rem;
+    background-color: #1E201E;
+    padding: 0.8rem;
+}
+
+.letter-brands a {
+    color: white;
+    text-decoration: none;
+    background-color: #C63C51;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    transition: padding 0.15s;
+}
+
+.letter-brands a:hover {
+    padding: 0.5rem;
+}
