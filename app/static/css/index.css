@@ -20,6 +20,7 @@
 .frags-container,
 .frag-container,
 .frag-header,
+.frag-about,
 .conc-container,
 .conc-header,
 .frag-img,
@@ -35,7 +36,7 @@
 }
 
 .frag-notes,
-.frags-accs,
+.frag-accs,
 .info-container {
     flex-wrap: wrap;
 }
@@ -66,6 +67,7 @@
 }
 
 .frag-container,
+.frag-about,
 .info-container,
 .conc-container,
 .nts-info,
