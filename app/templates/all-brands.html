@@ -1,5 +1,5 @@
 {% extends "parent-templates/base-content.html" %}
-{% block title %}Welcome{% endblock %}
+{% block title %}FAF - All Brands{% endblock %}
 {% block links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/all-brands.css') }}">
@@ -15,7 +15,7 @@
             </div>
             <div class="letter-brands">
                 {% for b in brands %}
-                <a href="/{{b.id}}"><h4>{{b.name}}</h4></a>
+                <a href="{{ url_for('selected_brand', slug=b.name|slugify) }}"><h4>{{b.name}}</h4></a>
                 {% endfor %}
             </div>
         </div>

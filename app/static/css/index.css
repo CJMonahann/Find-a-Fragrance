@@ -236,9 +236,28 @@
     color: white;
 }
 
-/*some media queries for now */
+/* a separate grid layout used for the explore-brand.html page*/
+.frags-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    padding: 1em;
+}
 
+.explore-title {
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+
+/*some media queries to make website look better on mobile*/
 @media screen and (max-width: 1400px) {
+    .frags-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
     .frags-container,
     .conc-info,
     .scents-info {
@@ -258,3 +277,5 @@
         width: 100%;
     }
 }
+
+

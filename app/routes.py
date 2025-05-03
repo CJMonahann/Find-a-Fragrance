@@ -12,6 +12,11 @@ from slugify import slugify
 load_dotenv()
 API = FragranceAPI()
 
+def slug_brand (brand):
+    return slugify(brand, regex_pattern=r"[^\w\s&\*-]") #custom patter to slugify
+
+app.jinja_env.filters['slugify'] = slug_brand #initialise slugify as a filter in Jinja to be used in templates
+
 #used to load data from a .json file when given a path
 def load_data(path):
     with open(path, "r") as file:
@@ -117,6 +122,10 @@ def get_lim_frags(num=5):
 
     return frags
 
+#returns the fragrances associated with a specific brand when given a brand's ID
+def get_brand_frags(b_id):
+    return Fragrances.query.filter_by(b_id=b_id).all()
+
 @app.route('/')
 @app.route('/HOME')
 @app.route('/home')
@@ -131,6 +140,19 @@ def all_brands():
     brands = get_all_brands()
     brandSet = sort_brands(brands)
     return render_template('all-brands.html', brandSet = brandSet)
+
+@app.route('/brands/<slug>')
+def selected_brand(slug):
+    #check to see if brand exist. Select brand is true.
+    brand = next(
+        (b for b in Brands.query.all() if slug_brand(b.name) == slug),
+        None
+    )
+    if not brand:
+        abort(404)
+
+    frags = get_brand_frags(brand.id) #collect all frags related to the brand
+    return render_template('explore-brand.html', b_name = brand.name, frags = frags)
 
 @app.route('/personal/web')
 def redirect_web():
