@@ -1,7 +1,15 @@
-.brands-container {
+.brands-container,
+.letter-brands {
     display: flex;
-    flex-direction: column;
+}
+
+.brands-container,
+.letter-brands {
     flex-wrap: wrap;
+}
+
+.brands-container {
+    flex-direction: column;
     padding: 1rem;
     gap: 1rem;
 }
@@ -9,6 +17,7 @@
 .letter-container {
     border: 1.5px solid black;
     border-radius: 0.15rem;
+    width: 100%;
 }
 
 .letter-header {
@@ -18,7 +27,6 @@
 }
 
 .letter-brands {
-    display: flex;
     gap: 1rem;
     background-color: #1E201E;
     padding: 0.8rem;
