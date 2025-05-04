@@ -4,6 +4,7 @@ from app.api import FragranceAPI #created API object to interact with API
 from dotenv import load_dotenv
 from app.models import Brands, Fragrances, Accords, Notes #tables in db
 import json, os
+from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 from slugify import slugify
@@ -126,6 +127,25 @@ def get_lim_frags(num=5):
 def get_brand_frags(b_id):
     return Fragrances.query.filter_by(b_id=b_id).all()
 
+def get_summ_frags():
+    frags = db.session.query(Fragrances).join(Accords).join(Notes).filter(
+    or_(
+        func.lower(Fragrances.desc).like('%summer%'),
+        func.lower(Fragrances.desc).like('%Summer%'),
+        func.lower(Notes.nt).like('%Orange%'),
+        func.lower(Notes.nt).like('%Ginger%'),
+        func.lower(Notes.nt).like('%Lemon%'),
+        func.lower(Notes.nt).like('%Mint'),
+        func.lower(Notes.nt).like('%Jasmine'),
+        func.lower(Accords.acc).like('%citrus%'),
+        func.lower(Accords.acc).like('%fresh%'),
+        func.lower(Accords.acc).like('%green%'),
+        func.lower(Accords.acc).like('%earthy%'),
+        func.lower(Accords.acc).like('%fruity%')
+    )
+    ).distinct().all()
+    return frags
+
 @app.route('/')
 @app.route('/HOME')
 @app.route('/home')
@@ -153,6 +173,12 @@ def selected_brand(slug):
 
     frags = get_brand_frags(brand.id) #collect all frags related to the brand
     return render_template('explore-brand.html', b_name = brand.name, frags = frags)
+
+@app.route('/summer/frags')
+def summer_frags():
+    frags = get_summ_frags()
+    print('returned frags!')
+    return render_template('summer-frags.html', frags = frags)
 
 @app.route('/personal/web')
 def redirect_web():
