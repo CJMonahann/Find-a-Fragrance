@@ -8,6 +8,7 @@ from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 from slugify import slugify
+import re
 
 #load .env variables and collect paths to website data
 load_dotenv()
@@ -146,6 +147,14 @@ def get_summ_frags():
     ).distinct().all()
     return frags
 
+def get_gendered_frags(gender):
+        pattern = fr'\b{re.escape(gender.lower())}\b'
+        print(pattern)
+        # Query that joins and filters all fragrances based on the 'gender' keyword provided
+        return db.session.query(Fragrances).join(Notes).join(Accords).filter(
+            func.lower(Fragrances.desc).op('REGEXP')(pattern)
+        ).distinct().all()
+
 @app.route('/')
 @app.route('/HOME')
 @app.route('/home')
@@ -173,6 +182,11 @@ def selected_brand(slug):
 
     frags = get_brand_frags(brand.id) #collect all frags related to the brand
     return render_template('explore-brand.html', b_name = brand.name, frags = frags)
+
+@app.route('/gender/frags/<gender>')
+def selected_gender(gender):
+    frags = get_gendered_frags(gender)
+    return render_template('gendered-frags.html', gender = gender, frags = frags)
 
 @app.route('/summer/frags')
 def summer_frags():
