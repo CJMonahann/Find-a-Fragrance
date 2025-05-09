@@ -47,7 +47,11 @@
     gap: 0.5rem;
 }
 
-.frags-container,
+.frags-container {
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
 .conc-info {
     justify-content: space-evenly;
     align-items: start;
@@ -76,6 +80,7 @@
 }
 
 .frag-container {
+    flex: 1;
     text-align: start;
 }
 
