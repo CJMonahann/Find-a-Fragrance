@@ -241,6 +241,10 @@
     color: white;
 }
 
+.prompt-container h1 {
+    margin-bottom: 2%;
+}
+
 /* a separate grid layout used for the explore-brand.html page*/
 .frags-grid {
     display: grid;
@@ -283,4 +287,12 @@
     }
 }
 
+@media screen and (max-width: 800px) {
+    .prompt-container {
+        padding: 1rem;
+    } 
 
+    .prompt-container h1 {
+        margin-bottom: 5%;
+    }
+}
