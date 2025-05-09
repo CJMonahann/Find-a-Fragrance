@@ -14,6 +14,7 @@ import re
 load_dotenv()
 API = FragranceAPI()
 
+#custom slug filter to rename brand names in the web page's url
 def slug_brand (brand):
     return slugify(brand, regex_pattern=r"[^\w\s&\*-]") #custom patter to slugify
 
@@ -25,6 +26,7 @@ def load_data(path):
         data = json.load(file)
     return data
 
+#checks db to ensure that all brands provided in the loaded fragrances.json file are in the db
 def check_db(API, j_brands):
 
     with app.app_context():
@@ -73,9 +75,10 @@ def populate_db(brands, API):
 
 #LOADING NEEDED DATA FOR INDEX PAGE
 #CHECKING DB BEFORE APP LAUNCH FOR ALL FRAGS
-data = load_data(os.getenv("__FRAGS_PATH"))
-concs = load_data(os.getenv("__CONCS_PATH"))
-check_db(API, data["fragrances"])
+DATA = load_data(os.getenv("__FRAGS_PATH"))
+CONCS = load_data(os.getenv("__CONCS_PATH"))
+SEASONS = load_data(os.getenv("__SNS_PATH"))
+check_db(API, DATA["fragrances"])
 
 #returns all brands held in the database - with all info
 def get_all_brands():
@@ -128,41 +131,62 @@ def get_lim_frags(num=5):
 def get_brand_frags(b_id):
     return Fragrances.query.filter_by(b_id=b_id).all()
 
-def get_summ_frags():
-    frags = db.session.query(Fragrances).join(Accords).join(Notes).filter(
-    or_(
-        func.lower(Fragrances.desc).like('%summer%'),
-        func.lower(Fragrances.desc).like('%Summer%'),
-        func.lower(Notes.nt).like('%Orange%'),
-        func.lower(Notes.nt).like('%Ginger%'),
-        func.lower(Notes.nt).like('%Lemon%'),
-        func.lower(Notes.nt).like('%Mint'),
-        func.lower(Notes.nt).like('%Jasmine'),
-        func.lower(Accords.acc).like('%citrus%'),
-        func.lower(Accords.acc).like('%fresh%'),
-        func.lower(Accords.acc).like('%green%'),
-        func.lower(Accords.acc).like('%earthy%'),
-        func.lower(Accords.acc).like('%fruity%')
-    )
-    ).distinct().all()
-    return frags
-
+#returns the fragrances associated with a specific gender identity when given a gender str
 def get_gendered_frags(gender):
         pattern = fr'\b{re.escape(gender.lower())}\b'
         print(pattern)
         # Query that joins and filters all fragrances based on the 'gender' keyword provided
-        return db.session.query(Fragrances).join(Notes).join(Accords).filter(
+        frags = db.session.query(Fragrances).join(Notes).join(Accords).filter(
             func.lower(Fragrances.desc).op('REGEXP')(pattern)
         ).distinct().all()
+
+        if not(frags): #if no frags were found matching criteria (e.g. - unisex)
+            frags = get_lim_frags(30)
+        
+        return frags
+
+#returns the fragrances associated with a specific season when given a season str
+def get_seasoned_frags(dict):
+    query = db.session.query(Fragrances).join(Notes).join(Accords)
+
+    # Build dynamic filters
+    filters = []
+    
+    if dict.get("keywords"):
+        desc_filters = [
+            func.lower(Fragrances.desc).like(f"%{word.lower()}%") for word in dict["keywords"]
+        ]
+        filters.append(or_(*desc_filters))
+    
+    if dict.get("nts"): #dict contains a list if true
+        note_filters = [
+            func.lower(Notes.nt).like(f"%{note.lower()}%") for note in dict["nts"]
+        ]
+        filters.append(or_(*note_filters))
+    
+    if dict.get("accs"): #dict contains a list if true
+        accord_filters = [
+            func.lower(Accords.acc).like(f"%{accord.lower()}%") for accord in dict["accs"]
+        ]
+        filters.append(or_(*accord_filters))
+    
+    # Apply filters
+    if filters:
+        query = query.filter(*filters)
+
+    # Avoid duplicates from joins
+    frags = query.distinct().all()
+    return frags
+
 
 @app.route('/')
 @app.route('/HOME')
 @app.route('/home')
 def index():
-    nts = data["info"]["nts"] # form: { "str":"str", ... }
-    accs = data["info"]["accs"] # form: { "str":"str", ... }
+    nts = DATA["info"]["nts"] # form: { "str":"str", ... }
+    accs = DATA["info"]["accs"] # form: { "str":"str", ... }
     frags = get_lim_frags(3)
-    return render_template('index.html', frags = frags, concs = concs, nts = nts, accs = accs)
+    return render_template('index.html', frags = frags, concs = CONCS, nts = nts, accs = accs)
 
 @app.route('/all/brands')
 def all_brands():
@@ -183,16 +207,16 @@ def selected_brand(slug):
     frags = get_brand_frags(brand.id) #collect all frags related to the brand
     return render_template('explore-brand.html', b_name = brand.name, frags = frags)
 
+@app.route('/seasons/frags/<season>')
+def selected_season(season):
+    frags = get_seasoned_frags(SEASONS[season]) #passes: dict containing a season's frag info
+    season = season[0].upper() + season[1:] #capitalize the first letter of the string
+    return render_template('seasoned-frags.html', season = season, frags = frags)
+
 @app.route('/gender/frags/<gender>')
 def selected_gender(gender):
     frags = get_gendered_frags(gender)
     return render_template('gendered-frags.html', gender = gender, frags = frags)
-
-@app.route('/summer/frags')
-def summer_frags():
-    frags = get_summ_frags()
-    print('returned frags!')
-    return render_template('summer-frags.html', frags = frags)
 
 @app.route('/personal/web')
 def redirect_web():

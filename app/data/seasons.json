@@ -1,0 +1,23 @@
+{
+    "fall": {
+        "keywords": ["fall", "autumn", "warm", "spicy", "woody", "cozy"],
+        "nts": ["spices", "cinnamon", "nutmeg", "clove", "cardamom", "vanilla","tonka bean", "praline", "fig", "plum", "apple", "dates", "cedar", "sandalwood", "patchouli"],
+        "accs": ["warm", "warm spicy", "spicy", "oriental", "woody", "amber", "gourmand"]
+    },
+    "winter": {
+        "keywords": ["winter", "rich", "deep", "smoky", "sensual"],
+        "nts": ["resin", "myrrh", "frankincense", "labdanum", "amber", "benzoin", "oud", "leather", "musk", "castoreum", "chocolate", "coffee", "vanilla", "rum"],
+        "accs": ["warm", "warm spicy", "spicy", "amber", "oriental", "woody", "leather", "smoky", "incense", "gourmand"]
+    },
+    "spring": {
+        "keywords": ["spring", "fresh", "floral", "green", "uplifting"],
+        "nts": ["floral", "lily of the valley", "lily", "rose", "peony", "jasmine", "violet", "grass", "green", "green tea", "tea", "galbanum", "violet", "violet leaf", "leaf", "pear", "rhubarb", "lychee", "apple", "bergamot", "lemon", "grapefruit", "mandarin"],
+        "accs": ["green", "fresh", "earthy", "fruity", "floral", "aromatic", "citrus"]
+    },
+    "summer": {
+        "keywords": ["summer", "bright", "aquatic", "refreshing", "tropical"],
+        "nts": ["orange", "ginger", "lemon", "mint", "jasmine", "citrus", "aquatic", "marine", "fruity", "basil", "rosemary", "coconut", "pineapple", "melon", "mango", "neroli", "yuzu", "sea", "breeze", "apple", "lychee"],
+        "accs": ["green", "citrus", "fresh", "earthy", "fruity", "aquatic",
+         "solar", "floral", "ozonic", "tropical", "fruit"]
+    }
+}
