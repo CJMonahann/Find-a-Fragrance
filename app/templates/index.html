@@ -1,61 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monahan's Website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/general.css')}}">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-        <a class="navbar-brand" href="#" >CoMon</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#about-section">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#exp-section">Experience</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#proj-section">Projects</a>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </nav>
+{% extends "parent-templates/base-content.html" %}
+{% block title %}Find A Frag{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
 
-    <div class="main-container">
-        <h1>Explore Today's Fragrances</h1>
-        <div class="explore-container">
-        {% for frag in frags %} 
-        <div class="frag-container">
-            <div class="frag-header">
-                <h2>{{frag.perfume}}</h2>
-                <a href="{{frag.url}}">Link</a>
-            </div>
-            <img src="{{frag.image}}">
-            <h3>{{frag.brand}}</h3>
-            <p>{{frag.description}}</p>
+{% block content %}
+
+<div class="prompt-container">
+    <h1>Find a cologne for you - just type away!</h1>
+    <div class="input-container">
+        <form method="POST" id="chatbox" action="/search/desc">
+            <textarea name="desc" id="desc" placeholder="e.g., vanilla, sweet, with a hint of amber"></textarea>
+        </form>
+    </div>
+</div>
+
+<div class="frags-container spacing">
+    {% for frag in frags %} 
+    <div class="frag-container">
+        <div class="frag-header">
+            <p class="frag-perf">{{frag.perfume}}</p>
+            <a href="{{frag.url}}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                </svg>
+            </a>
+        </div>
+        <div class="frag-img">
+            {% if frag.img %}
+                <img src="{{frag.img}}">
+            {% else %}
+                <img src="{{ url_for('static', filename='imgs/DefaultFrag.png') }}">
+            {% endif %}
+        </div>
+        <div class="frag-about">
+            <p class="frag-brand">{{frag.brand.name}}</p>
+            <p class="frag-desc">{{frag.desc}}</p>
             <div class="frag-notes">
-            {% for note in frag.notes %}
-                <p>{{note}}</p>
+            {% for nt in frag.notes %}
+                <p>{{nt.nt}}</p>
             {% endfor %}
+            </div>
+            <div class="frag-accs">
+                {% for acc in frag.accords %}
+                    <p>{{acc.acc}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="info-container spacing">
+    <div class="conc-info">
+        {% for typ in concs.values() %}
+        <div class="conc-container">
+            <div class="conc-header">
+                <p class="conc-typ">{{typ.type}}</p>
+            </div>
+            <div class="conc-about">
+                <p class="conc-conc">Concentration: {{typ.conc}}</p>
+                <div class="progress mb-4">
+                    <div class="progress-bar hello" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-per="{{typ.per}}"></div>
+                </div>
+                <p class="conc-hrs">Longevity: {{typ.hrs}}</p>
+                <div class="conc-notes">
+                    {% for nt in typ.nts %}
+                    <p>{{nt}}</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="scents-info">
+        <div class="nts-info">
+            <div class="txt-boxes">
+                {% for nt in nts.values() %}
+                    <p class="info-nt">{{nt}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="accs-info">
+            <div class="txt-boxes">
+                {% for acc in accs.values() %}
+                    <p class="info-acc">{{acc}}</p>
+                {% endfor %}
+            </div> 
         </div>
     </div>
-    <footer>
-        <a href="#TOP"> Back to Top </a>
-    </footer>
-    </div>
+</div>
 
-</body>
-</html>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/chatbox.js')}}"></script>
+<script src="{{ url_for('static', filename='scripts/index.js')}}" defer></script>
+{% endblock %}

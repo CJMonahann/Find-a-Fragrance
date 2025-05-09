@@ -1,0 +1,298 @@
+.spacing {
+    margin-top: 2rem;
+}
+
+.prompt-container {
+    padding: 5rem;
+    text-align: center;
+}
+
+.input-container textarea {
+    font-size: 1rem;
+    width: 60%;
+    border: none;
+    resize: none;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.frags-container,
+.frag-container,
+.frag-header,
+.frag-about,
+.conc-container,
+.conc-header,
+.frag-img,
+.frag-notes,
+.frag-accs, 
+.info-container,
+.conc-info,
+.conc-notes,
+.scents-info,
+.nts-info,
+.accs-info {
+    display: flex;
+}
+
+.frag-notes,
+.frag-accs,
+.info-container {
+    flex-wrap: wrap;
+}
+
+.frag-notes,
+.frag-accs,
+.conc-notes {
+    gap: 0.5rem;
+}
+
+.frags-container {
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.conc-info {
+    justify-content: space-evenly;
+    align-items: start;
+}
+
+.frags-container,
+.info-container,
+.conc-info {
+    padding: 1rem;
+}
+
+.frags-container,
+.info-container,
+.conc-info,
+.scents-info {
+    gap: 1rem;
+}
+
+.frag-container,
+.frag-about,
+.info-container,
+.conc-container,
+.nts-info,
+.accs-info {
+    flex-direction: column;
+}
+
+.frag-container {
+    flex: 1;
+    text-align: start;
+}
+
+.frag-header,
+.conc-header {
+    justify-content:space-between;
+    align-items: start;
+}
+
+.frag-img {
+    justify-content: center;
+    align-items: start;
+}
+
+.frag-img,
+.frag-about,
+.conc-about {
+    padding: 0.3rem;
+}
+
+.frag-perf,
+.conc-typ {
+    font-size: clamp(0.5rem, 1.2rem, 1.4);
+}
+
+.frag-container {
+    border: 1.5px solid black;
+    border-radius: 0.2rem;
+}
+
+.frag-img,
+.frag-about {
+    padding: 1rem;
+}
+
+.frag-img img {
+    width: clamp(10vw, 25vw, 40vw);
+    height: clamp(10vh, 30vh, 40vh);
+}
+
+.frag-brand,
+.frag-desc,
+.conc-conc,
+.conc-hrs {
+    font-size: clamp(0.5rem, 1rem, 1.5rem);
+}
+
+.frag-header {
+    color: white;
+}
+
+.frag-notes p,
+.conc-notes p{
+    color: white;
+    font-size: clamp(0.1rem, 0.8rem, 1rem);
+    margin-top: 1em;
+}
+
+.frag-notes p {
+    background-color: #C63C51;
+}
+
+.conc-notes p {
+    background-color: #2E073F;
+}
+
+.frag-accs p {
+    color: white;
+    font-size: clamp(0.1rem, 0.8rem, 1rem);
+    margin-top: 1em;
+    background-color: #FB773C;
+}
+
+.info-container {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.conc-container {
+    color: white;
+    background-color: #1E201E;
+    border-radius: 1rem;
+}
+
+
+.frag-header,
+.conc-header {
+    background-color: #2E073F;
+}
+
+.frag-header,
+.conc-header,
+.frag-notes p,
+.conc-notes p,
+.frag-accs p {
+    padding: 0.3rem;
+}
+
+.frag-notes p,
+.conc-notes p,
+.frag-accs p {
+    border-radius: 0.3rem;
+}
+
+.scents-info {
+    justify-content: center;
+    align-items:start;
+}
+
+.scents-info p {
+    text-align: center;
+}
+
+.scents-info div {
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.nts-info,
+.accs-info {
+    flex: 1;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+.nts-info {
+    background-image: url('../imgs/Scents.png');
+}
+
+.accs-info {
+    background-image: url('../imgs/Accords.png');
+}
+
+.nts-info::before,
+.accs-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 0;
+  } 
+
+.nts-info p,
+.accs-info p {
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+  }
+
+.prompt-container {
+    background-color: black;
+    color: white;
+}
+
+.prompt-container h1 {
+    margin-bottom: 2%;
+}
+
+/* a separate grid layout used for the explore-brand.html page*/
+.frags-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    padding: 1em;
+}
+
+.explore-title {
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+
+/*some media queries to make website look better on mobile*/
+@media screen and (max-width: 1400px) {
+    .frags-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .frags-container,
+    .conc-info,
+    .scents-info {
+        flex-direction: column;
+    }
+
+    .frags-container,
+    .conc-info, 
+    .scents-info {
+        align-items: center;
+    }
+
+    .frag-container,
+    .conc-container,
+    .nts-info,
+    .accs-info {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .prompt-container {
+        padding: 1rem;
+    } 
+
+    .prompt-container h1 {
+        margin-bottom: 5%;
+    }
+}
