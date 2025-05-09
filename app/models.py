@@ -1,5 +1,5 @@
 from app import db
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, JSON
 
 #These define the DB schema
 class Brands(db.Model):
@@ -20,7 +20,7 @@ class Fragrances(db.Model):
     rating = db.Column(db.Integer, unique=False)
     img = db.Column(db.String(250), unique=False)
     url = db.Column(db.String(250), unique=False)
-
+    embedding = db.Column(JSON)  #stores a vector list as JSON
     brand = db.relationship("Brands", back_populates="fragrances")
     accords = db.relationship("Accords", backref="fragrance", cascade="all, delete")
     notes = db.relationship("Notes", backref="fragrance", cascade="all, delete")
