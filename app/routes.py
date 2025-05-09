@@ -9,22 +9,32 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 from slugify import slugify
 import re
-
-#load .env variables and collect paths to website data
-load_dotenv()
-API = FragranceAPI()
-
-#custom slug filter to rename brand names in the web page's url
-def slug_brand (brand):
-    return slugify(brand, regex_pattern=r"[^\w\s&\*-]") #custom patter to slugify
-
-app.jinja_env.filters['slugify'] = slug_brand #initialise slugify as a filter in Jinja to be used in templates
+from sentence_transformers import SentenceTransformer
+import numpy as np
 
 #used to load data from a .json file when given a path
 def load_data(path):
     with open(path, "r") as file:
         data = json.load(file)
     return data
+
+'''
+ - Load .env variables and collect paths to website data
+ - Create machine learning model for creating embedded vectors
+ - LOADING NEEDED DATA FOR VARIOUS PAGES
+'''
+load_dotenv()
+DATA = load_data(os.getenv("__FRAGS_PATH"))
+CONCS = load_data(os.getenv("__CONCS_PATH"))
+SEASONS = load_data(os.getenv("__SNS_PATH"))
+API = FragranceAPI()
+MODEL = SentenceTransformer('all-MiniLM-L6-v2')
+
+#custom slug filter to rename brand names in the web page's url
+def slug_brand (brand):
+    return slugify(brand, regex_pattern=r"[^\w\s&\*-]") #custom patter to slugify
+
+app.jinja_env.filters['slugify'] = slug_brand #initialise slugify as a filter in Jinja to be used in templates
 
 #checks db to ensure that all brands provided in the loaded fragrances.json file are in the db
 def check_db(API, j_brands):
@@ -49,6 +59,11 @@ def populate_db(brands, API):
                 for frag in res: #returns a brand-specific list of dictionaries. Dicts are the frags
                      if not Fragrances.query.filter_by(perfume=frag["perfume"]).first(): #if frag not already had
 
+                        #create embedding, turning into JSON string, to be used in vector search
+                        emb_str = f"{frag.get("perfume")} is a fragrance described as: {frag.get("description")}.\
+                        It features notes of {', '.join(frag.get("notes"))}. Main accords include: {', '.join(frag.get("accords"))}"
+                        vector = get_embedding(emb_str) #creates vector from the above string desc
+                        
                         new_frag = Fragrances(b_id = b_id,
                                               api_id_1 = frag.get("_id"),
                                               api_id_2 = frag.get("id"),
@@ -56,7 +71,8 @@ def populate_db(brands, API):
                                               desc = frag.get("description"),
                                               rating = frag.get("rating") if frag["rating"] else 0,
                                               img = frag.get("image"),
-                                              url = frag.get("url")
+                                              url = frag.get("url"),
+                                              embedding = vector
                                             )
                         db.session.add(new_frag)
                         db.session.commit()
@@ -71,13 +87,37 @@ def populate_db(brands, API):
                         for nt in frag["notes"]:
                             new_note = Notes(f_id = f_id, nt = nt)
                             db.session.add(new_note)
-                            db.session.commit()    
+                            db.session.commit()
+                         
 
-#LOADING NEEDED DATA FOR INDEX PAGE
+# Get an embedding for a piece of text
+def get_embedding(text):
+    return MODEL.encode(text).tolist()
+
+#computes the cosine similarity between two vectors
+def cosine_similarity(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+#returns recommended colognes based off cosine similarities of all colognes
+def get_recs(query_emb, MAX=9):
+    frags = get_all_frags()
+
+    #compute similarities using each frag's vector embedding
+    scores = []
+    for f in frags:
+        if f.embedding: #if an embedding is had
+            cs = cosine_similarity(query_emb, f.embedding)
+            scores.append((cs, f))
+    
+    #sort by similarity in descending order
+    scores.sort(reverse=True, key=lambda x: x[0]) #uses cs - similarity
+
+    #return a sub-list of a given 'MAX' number of frags
+    return [f for cs, f in scores[:MAX]]
+
 #CHECKING DB BEFORE APP LAUNCH FOR ALL FRAGS
-DATA = load_data(os.getenv("__FRAGS_PATH"))
-CONCS = load_data(os.getenv("__CONCS_PATH"))
-SEASONS = load_data(os.getenv("__SNS_PATH"))
 check_db(API, DATA["fragrances"])
 
 #returns all brands held in the database - with all info
@@ -187,6 +227,13 @@ def index():
     accs = DATA["info"]["accs"] # form: { "str":"str", ... }
     frags = get_lim_frags(3)
     return render_template('index.html', frags = frags, concs = CONCS, nts = nts, accs = accs)
+
+@app.route('/search/desc', methods=['POST'])
+def user_search():
+    user_inpt = request.form['query']
+    user_vect = get_embedding(user_inpt)
+    frags = get_recs(user_vect)
+    return render_template('user-query.html', frags = frags)
 
 @app.route('/all/brands')
 def all_brands():
