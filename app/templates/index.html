@@ -39,7 +39,7 @@
             {% endif %}
         </div>
         <div class="frag-about">
-            <p class="frag-brand">{{frag.brand.name}}</p>
+            <p class="frag-brand heading-2">{{frag.brand.name}}</p>
             <p class="frag-desc">{{frag.desc}}</p>
             <div class="frag-notes">
             {% for nt in frag.notes %}
@@ -65,11 +65,11 @@
                 <p class="conc-typ heading">{{typ.type}}</p>
             </div>
             <div class="conc-about">
-                <p class="conc-conc">Concentration: {{typ.conc}}</p>
+                <p class="conc-conc"><span class="heading-3">Concentration:</span> {{typ.conc}}</p>
                 <div class="progress mb-4">
                     <div class="progress-bar hello" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-per="{{typ.per}}"></div>
                 </div>
-                <p class="conc-hrs">Longevity: {{typ.hrs}}</p>
+                <p class="conc-hrs"><span class="heading-3">Longevity:</span> {{typ.hrs}}</p>
                 <div class="conc-notes">
                     {% for nt in typ.nts %}
                     <p>{{nt}}</p>
