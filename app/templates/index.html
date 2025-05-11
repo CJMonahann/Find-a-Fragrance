@@ -61,10 +61,10 @@
     <div class="conc-info">
         {% for typ in concs.values() %}
         <div class="conc-container">
-            <div class="conc-header">
+            <div class="conc-header p-2">
                 <p class="conc-typ heading">{{typ.type}}</p>
             </div>
-            <div class="conc-about">
+            <div class="conc-about p-2">
                 <p class="conc-conc"><span class="heading-3">Concentration:</span> {{typ.conc}}</p>
                 <div class="progress mb-4">
                     <div class="progress-bar hello" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-per="{{typ.per}}"></div>
