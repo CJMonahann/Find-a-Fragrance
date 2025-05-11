@@ -146,8 +146,8 @@
 }
 
 .frag-img img {
-    width: clamp(10vw, 25vw, 40vw);
-    height: clamp(10vh, 30vh, 40vh);
+    width: 12vw;
+    height: 32vh;
 }
 
 .frag-brand,

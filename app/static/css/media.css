@@ -24,6 +24,19 @@
     .accs-info {
         width: 100%;
     }
+
+    .frag-img img {
+    width: 23vw;
+    height: 40vh;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+  .frag-img img {
+    width: 22vw;
+    height: 35vh;
+}
 }
 
 @media screen and (max-width: 800px) {
@@ -39,4 +52,17 @@
     .accs-info p {
         font-size: medium;
   }
+
+  .frag-img img {
+    width: 25vw;
+    height: 34vh;
+}
+}
+
+@media screen and (max-width: 570px) {
+
+  .frag-img img {
+    width: 25vw;
+    height: 32vh;
+}
 }
