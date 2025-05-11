@@ -17,6 +17,7 @@
     overflow: hidden;
 }
 
+.key-container,
 .frags-container,
 .frag-container,
 .frag-header,
@@ -35,10 +36,38 @@
     display: flex;
 }
 
+.key-container,
 .frag-notes,
 .frag-accs,
 .info-container {
     flex-wrap: wrap;
+}
+
+.key-container {
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+    gap: 1em;
+}
+
+.key-nts {
+    background-color: #C63C51;
+}
+
+.key-accs {
+    background-color: #FB773C;
+}
+
+.key-label {
+    font-weight: 700;
+}
+
+.key-nts,
+.key-accs {
+    padding: 1rem;
+    border-radius: 1.2rem;
+    font-weight: 700;
+    color: white;
 }
 
 .frag-notes,
@@ -233,7 +262,8 @@
 .accs-info p {
     position: relative;
     z-index: 1;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: large;
   }
 
 .prompt-container {
@@ -295,4 +325,9 @@
     .prompt-container h1 {
         margin-bottom: 5%;
     }
+
+    .nts-info p,
+    .accs-info p {
+        font-size: medium;
+  }
 }
