@@ -20,6 +20,18 @@ footer {
     background-color: black;
 }
 
+.footer-txt {
+    color: white;
+}
+
+.footer-txt:hover {
+    cursor: pointer;
+}
+
+.footer-bttn:hover {
+    background-color: #3e0a55;
+}
+
 footer a {
     text-decoration: none;
 }
