@@ -25,15 +25,19 @@
         width: 100%;
     }
 
-    .frag-img img {
+    .true-img{
     width: 23vw;
     height: 40vh;
+    }
+
+    .img-txt {
+        left: 51%;
     }
 }
 
 @media screen and (max-width: 1200px) {
 
-  .frag-img img {
+  .true-img{
     width: 22vw;
     height: 35vh;
 }
@@ -53,7 +57,7 @@
         font-size: medium;
   }
 
-  .frag-img img {
+  .true-img{
     width: 25vw;
     height: 34vh;
 }
@@ -61,7 +65,7 @@
 
 @media screen and (max-width: 570px) {
 
-  .frag-img img {
+  .true-img{
     width: 25vw;
     height: 32vh;
 }

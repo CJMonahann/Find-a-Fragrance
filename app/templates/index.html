@@ -33,9 +33,12 @@
         </div>
         <div class="frag-img">
             {% if frag.img %}
-                <img src="{{frag.img}}">
+                <img class="true-img" src="{{frag.img}}">
             {% else %}
+                <div class="no-img true-img">
                 <img src="{{ url_for('static', filename='imgs/DefaultFrag.jpg') }}">
+                <div class="img-txt">No image available</div>
+                </div>
             {% endif %}
         </div>
         <div class="frag-about">
