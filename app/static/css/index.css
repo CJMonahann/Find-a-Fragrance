@@ -145,9 +145,9 @@
     padding: 1rem;
 }
 
-.frag-img img {
-    width: clamp(10vw, 25vw, 40vw);
-    height: clamp(10vh, 30vh, 40vh);
+.true-img {
+    width: 12vw;
+    height: 32vh;
 }
 
 .frag-brand,
@@ -286,48 +286,4 @@
 .explore-title {
     padding-top: 1%;
     padding-left: 1%;
-}
-
-
-/*some media queries to make website look better on mobile*/
-@media screen and (max-width: 1400px) {
-    .frags-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-    }
-
-    .frags-container,
-    .conc-info,
-    .scents-info {
-        flex-direction: column;
-    }
-
-    .frags-container,
-    .conc-info, 
-    .scents-info {
-        align-items: center;
-    }
-
-    .frag-container,
-    .conc-container,
-    .nts-info,
-    .accs-info {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .prompt-container {
-        padding: 1rem;
-    } 
-
-    .prompt-container h1 {
-        margin-bottom: 5%;
-    }
-
-    .nts-info p,
-    .accs-info p {
-        font-size: medium;
-  }
 }

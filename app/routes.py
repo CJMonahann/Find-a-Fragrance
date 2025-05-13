@@ -263,6 +263,7 @@ def selected_season(season):
 @app.route('/gender/frags/<gender>')
 def selected_gender(gender):
     frags = get_gendered_frags(gender)
+    gender = gender[0].upper() + gender[1:]
     return render_template('gendered-frags.html', gender = gender, frags = frags)
 
 @app.route('/personal/web')

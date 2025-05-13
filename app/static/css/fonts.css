@@ -1,0 +1,23 @@
+* {
+   font-family: "PT Sans Narrow", sans-serif;; 
+}
+
+.heading {
+  font-family: "Fugaz One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.heading-basic {
+    color: white;
+}
+
+.heading-2 {
+    font-weight:bold;
+    font-size: 115%;
+}
+
+.heading-3 {
+    font-weight:bold;
+    font-size: 105%;
+}

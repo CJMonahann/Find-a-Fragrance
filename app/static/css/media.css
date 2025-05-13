@@ -1,0 +1,72 @@
+/*some media queries to make website look better on mobile*/
+@media screen and (max-width: 1400px) {
+    .frags-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .frags-container,
+    .conc-info,
+    .scents-info {
+        flex-direction: column;
+    }
+
+    .frags-container,
+    .conc-info, 
+    .scents-info {
+        align-items: center;
+    }
+
+    .frag-container,
+    .conc-container,
+    .nts-info,
+    .accs-info {
+        width: 100%;
+    }
+
+    .true-img{
+    width: 23vw;
+    height: 40vh;
+    }
+
+    .img-txt {
+        left: 51%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+  .true-img{
+    width: 22vw;
+    height: 35vh;
+}
+}
+
+@media screen and (max-width: 800px) {
+    .prompt-container {
+        padding: 1rem;
+    } 
+
+    .prompt-container h1 {
+        margin-bottom: 5%;
+    }
+
+    .nts-info p,
+    .accs-info p {
+        font-size: medium;
+  }
+
+  .true-img{
+    width: 25vw;
+    height: 34vh;
+}
+}
+
+@media screen and (max-width: 570px) {
+
+  .true-img{
+    width: 25vw;
+    height: 32vh;
+}
+}

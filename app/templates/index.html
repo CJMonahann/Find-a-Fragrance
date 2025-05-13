@@ -24,7 +24,7 @@
     <div class="frag-container">
         <div class="frag-header">
             <p class="frag-perf heading">{{frag.perfume}}</p>
-            <a href="{{frag.url}}">
+            <a class="heading-basic" href="{{frag.url}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
                     <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
@@ -33,13 +33,16 @@
         </div>
         <div class="frag-img">
             {% if frag.img %}
-                <img src="{{frag.img}}">
+                <img class="true-img" src="{{frag.img}}">
             {% else %}
-                <img src="{{ url_for('static', filename='imgs/DefaultFrag.png') }}">
+                <div class="no-img true-img">
+                <img src="{{ url_for('static', filename='imgs/DefaultFrag.jpg') }}">
+                <div class="img-txt">No image available</div>
+                </div>
             {% endif %}
         </div>
         <div class="frag-about">
-            <p class="frag-brand">{{frag.brand.name}}</p>
+            <p class="frag-brand heading-2">{{frag.brand.name}}</p>
             <p class="frag-desc">{{frag.desc}}</p>
             <div class="frag-notes">
             {% for nt in frag.notes %}
@@ -61,15 +64,15 @@
     <div class="conc-info">
         {% for typ in concs.values() %}
         <div class="conc-container">
-            <div class="conc-header">
-                <p class="conc-typ">{{typ.type}}</p>
+            <div class="conc-header p-2">
+                <p class="conc-typ heading">{{typ.type}}</p>
             </div>
-            <div class="conc-about">
-                <p class="conc-conc">Concentration: {{typ.conc}}</p>
+            <div class="conc-about p-2">
+                <p class="conc-conc"><span class="heading-3">Concentration:</span> {{typ.conc}}</p>
                 <div class="progress mb-4">
                     <div class="progress-bar hello" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" data-per="{{typ.per}}"></div>
                 </div>
-                <p class="conc-hrs">Longevity: {{typ.hrs}}</p>
+                <p class="conc-hrs"><span class="heading-3">Longevity:</span> {{typ.hrs}}</p>
                 <div class="conc-notes">
                     {% for nt in typ.nts %}
                     <p>{{nt}}</p>

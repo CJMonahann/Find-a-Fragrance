@@ -6,12 +6,17 @@
 
 {% block content %}
     <h1 class="explore-title">Explore {{b_name}}</h1>
+
+    <div class="key-container">
+        <h2 class="key-label heading">Key:</h2><div class="key-nts">Notes</div><div class="key-accs">Accords</div>
+    </div>
+
     <div class="frags-grid">
         {% for frag in frags %} 
         <div class="frag-container">
             <div class="frag-header">
-                <p class="frag-perf">{{frag.perfume}}</p>
-                <a href="{{frag.url}}">
+                <p class="frag-perf heading">{{frag.perfume}}</p>
+                <a class="heading-basic" href="{{frag.url}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
                         <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
@@ -20,13 +25,16 @@
             </div>
             <div class="frag-img">
                 {% if frag.img %}
-                    <img src="{{frag.img}}">
+                    <img class="true-img" src="{{frag.img}}">
                 {% else %}
-                    <img src="{{ url_for('static', filename='imgs/DefaultFrag.png') }}">
+                    <div class="no-img true-img">
+                        <img src="{{ url_for('static', filename='imgs/DefaultFrag.jpg') }}">
+                        <div class="img-txt">No image available</div>
+                    </div>
                 {% endif %}
             </div>
             <div class="frag-about">
-                <p class="frag-brand">{{frag.brand.name}}</p>
+                <p class="frag-brand heading-2">{{frag.brand.name}}</p>
                 <p class="frag-desc">{{frag.desc}}</p>
                 <div class="frag-notes">
                 {% for nt in frag.notes %}
