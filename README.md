@@ -13,7 +13,7 @@ Instead of relying on keyword matching, FragranceFinder uses **semantic embeddin
 > User query:  
 > *"I'm looking for something fresh and woody, but not too strong."*
 
-Even if those exact words don’t appear in any fragrance description, our system understands the **intent** and recommends colognes that match the vibe — like crisp green notes or light cedar blends.
+Even if those exact words don’t appear in any fragrance description, the system understands the **intent** and recommends colognes that match the vibe — like crisp green notes or light cedar blends.
 
 ---
 
