@@ -23,7 +23,7 @@ Even if those exact words don’t appear in any fragrance description, the syste
 User input is passed into a **Sentence Transformer** model (e.g., `all-MiniLM-L6-v2`), which converts text into a vector embedding.
 
 ### 🧱 2. Vector Storage
-Each fragrance in our database has a precomputed embedding, generated from its **description**, **notes**, and **style**.
+Each fragrance in our database has a precomputed embedding, generated from its **description**, **notes**, and **accords**.
 
 ### 📐 3. Semantic Similarity Search
 We use **cosine similarity** to compare the user’s embedding against every stored fragrance vector.
