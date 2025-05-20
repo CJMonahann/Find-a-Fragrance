@@ -26,7 +26,7 @@ User input is passed into a **Sentence Transformer** model (e.g., `all-MiniLM-L6
 Each fragrance in our database has a precomputed embedding, generated from its **description**, **notes**, and **accords**.
 
 ### 📐 3. Semantic Similarity Search
-We use **cosine similarity** to compare the user’s embedding against every stored fragrance vector.
+**Cosine similarity** is used to compare the user’s embedding against every stored fragrance vector.
 
 ### 🏆 4. Ranking & Recommendations
 The top matches are returned based on highest similarity — with the option to include filters like price, gender, or season.
