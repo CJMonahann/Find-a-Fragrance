@@ -1,6 +1,6 @@
 # 🌿 Find a Fragrance — Smarter Scent Discovery
 
-Welcome to **FragranceFinder**, an intelligent fragrance recommendation engine that understands **what you're looking for** — even when you don't know the name. This project uses **semantic search**, powered by AI-generated **vector embeddings**, to help users find fragrances based on style, mood, and descriptive intent.
+Welcome to **Find a Fragrance**, an intelligent fragrance recommendation engine that understands **what you're looking for** — even when you don't know the name. This project uses **semantic search**, powered by AI-generated **vector embeddings**, to help users find fragrances based on style, mood, and descriptive intent.
 
 ---
 
