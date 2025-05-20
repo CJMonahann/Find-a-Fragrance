@@ -6,7 +6,7 @@ Welcome to **Find a Fragrance**, an intelligent fragrance recommendation engine 
 
 ## 🧠 How It Works
 
-Instead of relying on keyword matching, FragranceFinder uses **semantic embeddings** to represent both user queries and fragrance profiles in high-dimensional vector space.
+Instead of relying on keyword matching, Find a Fragrance uses **semantic embeddings** to represent both user queries and fragrance profiles in high-dimensional vector space.
 
 ### ✨ Example
 
@@ -71,8 +71,8 @@ Semantic search provides a **human-like** way to find fragrances. It's not about
 ## 🧰 Installation
 
 ```bash
-git clone https://github.com/your-username/fragrancefinder.git
-cd fragrancefinder
+git clone https://github.com/your-username/Find a Fragrance.git
+cd Find a Fragrance
 python3 -m venv venv
 source venv/bin/activate
 ```
