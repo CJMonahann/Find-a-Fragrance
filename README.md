@@ -3,7 +3,11 @@
 Welcome to **Find a Fragrance**, an intelligent fragrance recommendation engine that understands **what you're looking for** — even when you don't know the name. This project uses **semantic search**, powered by AI-generated **vector embeddings**, to help users find fragrances based on style, mood, and descriptive intent.
 
 ---
+## 🎥 Watch Demo on YouTube
 
+[![Watch the demo](https://github.com/user-attachments/assets/bb9ce95a-0e55-4f36-ae00-96820a53538c)](https://youtu.be/7nwBJ1irFSM?si=SMzeZsfwnDGeeWf5)
+
+---
 ## 🧠 How It Works
 
 Instead of relying on keyword matching, Find a Fragrance uses **semantic embeddings** to represent both user queries and fragrance profiles in high-dimensional vector space.
